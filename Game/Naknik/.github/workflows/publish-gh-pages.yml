@@ -1,0 +1,72 @@
+# .github/workflows/webgl-pages.yml
+name: Build & Deploy WebGL to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+# Required for Pages deployments
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # (Optional but speeds up builds a lot)
+      - name: Cache Library
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-WebGL-${{ hashFiles('**/Packages/manifest.json') }}
+          restore-keys: |
+            Library-WebGL-
+            Library-
+
+      # Activate Unity (choose ONE method)
+      # A) With license file stored in repo secret UNITY_LICENSE (ULF content)
+      - name: Activate Unity
+        uses: game-ci/unity-activate@v2
+        with:
+          unityLicense: ${{ secrets.UNITY_LICENSE }}
+
+      # B) Or with credentials/serial (for Pro/Plus); see docs
+      # - uses: game-ci/unity-activate@v2
+      #   with:
+      #     unityEmail: ${{ secrets.UNITY_EMAIL }}
+      #     unityPassword: ${{ secrets.UNITY_PASSWORD }}
+      #     unitySerial: ${{ secrets.UNITY_SERIAL }}
+
+      # Build WebGL (auto-detects Unity version from ProjectSettings)
+      - name: Build (WebGL)
+        uses: game-ci/unity-builder@v4
+        with:
+          targetPlatform: WebGL
+          projectPath: .
+          buildName: WebGLBuild
+          buildPath: build
+
+      # Package the WebGL build for GitHub Pages
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL/WebGLBuild
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
