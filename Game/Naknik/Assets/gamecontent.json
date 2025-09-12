@@ -1,232 +1,142 @@
 {
-    "version": "1.0",
+    "version": "1.4",
+    "economy": {
+        "initial_coins": 10,
+        "stipend_per_interval": 10,
+        "stipend_interval_requests": 3
+    },
     "resource_types": [
-        "favors",
-        "leverage",
-        "reputation",
-        "agenda"
+        "coins",
+        "reputation"
     ],
-    "tag_categories": [
-        {
-            "name": "Class",
-            "values": [
-                "Lower",
-                "Middle",
-                "Upper",
-                "Royal"
-            ]
-        },
-        {
-            "name": "Temperament",
-            "values": [
-                "Greedy",
-                "Idealist",
-                "Pragmatic",
-                "Zealot"
-            ]
-        },
-        {
-            "name": "Faction",
-            "values": [
-                "Guild",
-                "Church",
-                "Guard",
-                "Smugglers",
-                "Court"
-            ]
-        }
+    "tag_pool": [
+        "nobility",
+        "smugglers",
+        "merchants",
+        "guards",
+        "clergy",
+        "riverfolk",
+        "artisans",
+        "miners",
+        "scholars",
+        "actors",
+        "dockhands",
+        "masons"
     ],
     "npcs": [
         {
-            "id": "npc_seraphine",
-            "name": "Lady Seraphine",
-            "role": "Tax Magistrate",
-            "tags": {
-                "Class": "Upper",
-                "Temperament": "Pragmatic",
-                "Faction": "Court"
-            },
-            "notes": "Balances revenue and public calm; dislikes blatant scandals."
+            "id": "npc_mara_quayside_smuggler",
+            "name": "Mara Quayside",
+            "role": "smuggler",
+            "tags": [
+                "smugglers",
+                "dockhands"
+            ],
+            "notes": "Trades in gray shipments; responsive to favors and quiet coin."
         },
         {
-            "id": "npc_malek",
-            "name": "Brother Malek",
-            "role": "Church Almoner",
-            "tags": {
-                "Class": "Middle",
-                "Temperament": "Idealist",
-                "Faction": "Church"
-            },
-            "notes": "Wants visible charity; sensitive to court overreach."
+            "id": "npc_lord_averin_treasurer",
+            "name": "Lord Averin",
+            "role": "royal treasurer",
+            "tags": [
+                "nobility",
+                "merchants",
+                "scholars"
+            ],
+            "notes": "Balances books; reputation sensitive."
         },
         {
-            "id": "npc_garran",
-            "name": "Captain Garran",
-            "role": "City Guard Captain",
-            "tags": {
-                "Class": "Middle",
-                "Temperament": "Zealot",
-                "Faction": "Guard"
-            },
-            "notes": "Obsessed with order; will trade favors for crackdowns."
+            "id": "npc_brother_ephraim_scribe",
+            "name": "Brother Ephraim",
+            "role": "court scribe",
+            "tags": [
+                "scholars",
+                "clergy"
+            ],
+            "notes": "Controls archives and proclamations."
         },
         {
-            "id": "npc_vexa",
-            "name": "Vexa “Whisper”",
-            "role": "Smuggler Fixer",
-            "tags": {
-                "Class": "Lower",
-                "Temperament": "Greedy",
-                "Faction": "Smugglers"
-            },
-            "notes": "Knows everyone’s dirt; responds to leverage and amnesty."
+            "id": "npc_captain_rusk_river_patrol",
+            "name": "Captain Rusk",
+            "role": "river patrol captain",
+            "tags": [
+                "guards",
+                "riverfolk"
+            ],
+            "notes": "Keeps river lanes secure; dislikes smugglers."
+        },
+        {
+            "id": "npc_priestess_lyria_temple",
+            "name": "Priestess Lyria",
+            "role": "temple envoy",
+            "tags": [
+                "clergy",
+                "nobility"
+            ],
+            "notes": "Seeks pious donations and moral optics."
+        },
+        {
+            "id": "npc_brinna_coin_counter",
+            "name": "Brinna Ledger",
+            "role": "coin counter",
+            "tags": [
+                "merchants",
+                "artisans"
+            ],
+            "notes": "Can massage ledgers or fast-track payments."
+        },
+        {
+            "id": "npc_harl_stonebreaker",
+            "name": "Harl Stonebreaker",
+            "role": "mason foreman",
+            "tags": [
+                "masons",
+                "artisans"
+            ],
+            "notes": "Oversees city wall repairs; needs materials and protection."
+        },
+        {
+            "id": "npc_tomas_stagewright",
+            "name": "Tomas Stagewright",
+            "role": "theatre impresario",
+            "tags": [
+                "actors",
+                "nobility"
+            ],
+            "notes": "Courts elite with performances; shapes public mood."
+        },
+        {
+            "id": "npc_ira_coppervein",
+            "name": "Ira Coppervein",
+            "role": "mine factor",
+            "tags": [
+                "miners",
+                "merchants"
+            ],
+            "notes": "Controls ore shipments; wary of taxes and raids."
         }
     ],
     "requests": [
         {
-            "id": "r_ser_over",
-            "npc_id": "npc_seraphine",
-            "type": "over",
-            "title": "Audit Relief for Bakers’ Guild",
-            "description": "Publicly reduce audits/fees for the Bakers’ Guild to stabilize bread prices.",
+            "id": "req_mara_safe_dock",
+            "npc_id": "npc_mara_quayside_smuggler",
+            "title": "Quiet Berth at Dusk",
+            "request_text": "Greetings, advisor—could you secure a quiet berth at dusk so my barge avoids inspection?",
+            "locked": false,
             "options": {
                 "deny": {
                     "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": -1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "unrest_high",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_mal_over",
-                            "mode": "harder"
-                        }
-                    ]
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 1,
-                        "leverage": 0,
-                        "reputation": 2,
-                        "agenda": 1
+                        "reputation": 1
                     },
                     "favors_delta": [
                         {
-                            "category": "Faction",
-                            "value": "Guild",
+                            "tag": "guards",
                             "delta": 1
                         }
                     ],
                     "flags_set": [
                         {
-                            "key": "bakers_relief_public",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_mal_over",
-                            "mode": "easier"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Tie relief to a public thanks from Church",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 1
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": []
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 1,
-                                "leverage": 0,
-                                "reputation": 3,
-                                "agenda": 2
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Guild",
-                                    "delta": 1
-                                },
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "church_praised_relief",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_mal_gray",
-                                    "mode": "easier"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_mal_over",
-                    "strength": "tight",
-                    "effect": "easier",
-                    "note": "Cheaper bread aids alms drive."
-                },
-                {
-                    "on": "deny",
-                    "to_request_id": "r_gar_over",
-                    "strength": "loose",
-                    "effect": "available",
-                    "note": "Unrest prompts Guard funding request."
-                }
-            ]
-        },
-        {
-            "id": "r_ser_under",
-            "npc_id": "npc_seraphine",
-            "type": "under",
-            "title": "Erase Donor’s Ledger Entry",
-            "description": "Quietly remove a noble donor’s tax debt from the records.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "court_clean_hands",
+                            "key": "flag_docks_heightened_checks",
                             "value": true
                         }
                     ],
@@ -234,75 +144,55 @@
                 },
                 "accept": {
                     "resources_delta": {
-                        "favors": 1,
-                        "leverage": 1,
-                        "reputation": -2,
-                        "agenda": 0
+                        "coins": -4,
+                        "reputation": -1
                     },
                     "favors_delta": [
                         {
-                            "category": "Class",
-                            "value": "Upper",
-                            "delta": 1
+                            "tag": "smugglers",
+                            "delta": 2
                         }
                     ],
                     "flags_set": [
                         {
-                            "key": "ledger_erased",
+                            "key": "flag_mara_debt_paid",
                             "value": true
                         }
                     ],
                     "unlocks": [
-                        {
-                            "request_id": "r_vex_gray",
-                            "mode": "easier"
-                        }
+                        "req_mara_rare_cargo"
                     ]
                 },
                 "bargain": [
                     {
-                        "label": "Erase debt but demand future ‘donation’ to public granaries",
+                        "label": "Ask for cut of profits",
                         "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
                             "favors_spend": [
                                 {
-                                    "category": "Class",
-                                    "value": "Upper",
+                                    "tag": "smugglers",
                                     "amount": 1
                                 }
-                            ],
-                            "flags_required": []
+                            ]
                         },
                         "result": {
                             "resources_delta": {
-                                "favors": 1,
-                                "leverage": 0,
-                                "reputation": -1,
-                                "agenda": 2
+                                "coins": 2,
+                                "reputation": -1
                             },
                             "favors_delta": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Guild",
+                                    "tag": "smugglers",
                                     "delta": 1
                                 }
                             ],
                             "flags_set": [
                                 {
-                                    "key": "noble_bound_to_granaries",
+                                    "key": "flag_cut_from_mara",
                                     "value": true
                                 }
                             ],
                             "unlocks": [
-                                {
-                                    "request_id": "r_mal_over",
-                                    "mode": "easier"
-                                }
+                                "req_mara_rare_cargo"
                             ]
                         }
                     }
@@ -311,336 +201,90 @@
             "links": [
                 {
                     "on": "accept",
-                    "to_request_id": "r_vex_gray",
-                    "strength": "tight",
-                    "effect": "easier",
-                    "note": "Vexa can use the erased record as blackmail."
-                }
-            ]
-        },
-        {
-            "id": "r_ser_gray",
-            "npc_id": "npc_seraphine",
-            "type": "gray",
-            "title": "Fast-Track Tariff on ‘Luxury Spices’",
-            "description": "Reclassify certain imports to shore up revenue without open debate.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": -1,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Guild",
-                            "delta": -1
-                        }
-                    ],
-                    "flags_set": [],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 1,
-                        "reputation": -1,
-                        "agenda": 1
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "spice_tariff_active",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_vex_under",
-                            "mode": "harder"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Public consultation staged by Church",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 1,
-                                "agenda": 1
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": [
-                                {
-                                    "key": "church_praised_relief",
-                                    "value": true
-                                }
-                            ]
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 1,
-                                "agenda": 2
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "consultation_theatre",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_vex_under",
-                                    "mode": "modified"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_vex_under",
+                    "to_request_id": "req_rusk_raid_warning",
                     "strength": "tight",
                     "effect": "harder",
-                    "note": "Tariffs make smuggling riskier."
-                },
-                {
-                    "on": "bargain",
-                    "to_request_id": "r_mal_gray",
-                    "strength": "loose",
-                    "effect": "easier",
-                    "note": "Church cover improves propaganda plays."
+                    "note": "River patrol grows suspicious of uninspected barges."
                 }
             ]
         },
         {
-            "id": "r_mal_over",
-            "npc_id": "npc_malek",
-            "type": "over",
-            "title": "Bread for the Poor",
-            "description": "Request court funds to expand the soup-kitchen line for a month.",
+            "id": "req_mara_rare_cargo",
+            "npc_id": "npc_mara_quayside_smuggler",
+            "title": "Rare Cargo Discretion",
+            "request_text": "Could you ensure the clerk records my cargo as grain rather than curiosities this once?",
+            "locked": true,
             "options": {
                 "deny": {
                     "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": -1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "hunger_visible",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_gar_over",
-                            "mode": "available"
-                        }
-                    ]
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 1,
-                        "leverage": 0,
-                        "reputation": 2,
-                        "agenda": 1
+                        "reputation": 1
                     },
                     "favors_delta": [
                         {
-                            "category": "Faction",
-                            "value": "Church",
+                            "tag": "guards",
                             "delta": 1
                         }
                     ],
                     "flags_set": [
                         {
-                            "key": "alms_funded",
+                            "key": "flag_mara_snubbed",
                             "value": true
                         }
                     ],
                     "unlocks": []
                 },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -6,
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "smugglers",
+                            "delta": 2
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_curious_ledger_entry",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_averin_gap_in_ledgers"
+                    ]
+                },
                 "bargain": [
                     {
-                        "label": "Fund if Church publicly praises the Advisor",
+                        "label": "Temple donation cover",
                         "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 1
-                            },
+                            "coins_spend": 3,
                             "favors_spend": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Church",
+                                    "tag": "clergy",
                                     "amount": 1
-                                }
-                            ],
-                            "flags_required": []
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 1,
-                                "leverage": 0,
-                                "reputation": 3,
-                                "agenda": 2
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "advisor_praised",
-                                    "value": true
-                                },
-                                {
-                                    "key": "alms_funded",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_ser_gray",
-                                    "mode": "easier"
                                 }
                             ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_ser_over",
-                    "strength": "loose",
-                    "effect": "easier",
-                    "note": "Mutual goodwill with guilds via charity."
-                }
-            ]
-        },
-        {
-            "id": "r_mal_under",
-            "npc_id": "npc_malek",
-            "type": "under",
-            "title": "Divert Tithe Without Bishop’s Writ",
-            "description": "Reassign a tithe to an orphanage, bypassing formal approvals.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [],
-                    "flags_set": [],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 1,
-                        "leverage": 1,
-                        "reputation": -1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Temperament",
-                            "value": "Idealist",
-                            "delta": 1
-                        }
-                    ],
-                    "flags_set": [
-                        {
-                            "key": "tithe_diverted",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_gar_gray",
-                            "mode": "easier"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Get Guard escort to ‘secure’ the transfer",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Guard",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": []
                         },
                         "result": {
                             "resources_delta": {
-                                "favors": 1,
-                                "leverage": 1,
-                                "reputation": -2,
-                                "agenda": 1
+                                "coins": -3,
+                                "reputation": 1
                             },
                             "favors_delta": [
                                 {
-                                    "category": "Temperament",
-                                    "value": "Idealist",
-                                    "delta": 1
-                                },
-                                {
-                                    "category": "Faction",
-                                    "value": "Guard",
+                                    "tag": "smugglers",
                                     "delta": 1
                                 }
                             ],
                             "flags_set": [
                                 {
-                                    "key": "guard_seen_helping_church",
+                                    "key": "flag_temple_receipt_used",
                                     "value": true
                                 }
                             ],
                             "unlocks": [
-                                {
-                                    "request_id": "r_gar_over",
-                                    "mode": "easier"
-                                }
+                                "req_averin_gap_in_ledgers"
                             ]
                         }
                     }
@@ -649,462 +293,118 @@
             "links": [
                 {
                     "on": "bargain",
-                    "to_request_id": "r_gar_over",
-                    "strength": "tight",
-                    "effect": "easier",
-                    "note": "Guard owed for escort."
-                }
-            ]
-        },
-        {
-            "id": "r_mal_gray",
-            "npc_id": "npc_malek",
-            "type": "gray",
-            "title": "Endorse the Advisor from the Pulpit",
-            "description": "A glowing sermon to improve the Advisor’s public standing.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": -1,
-                        "leverage": 0,
-                        "reputation": 0,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Church",
-                            "delta": -1
-                        }
-                    ],
-                    "flags_set": [],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 2,
-                        "agenda": 1
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "advisor_praised",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_ser_gray",
-                            "mode": "easier"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Share court agenda to align with Church",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 2
-                            },
-                            "favors_spend": [],
-                            "flags_required": []
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 3,
-                                "agenda": -1
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "church_briefed",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_ser_gray",
-                                    "mode": "easier"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_ser_gray",
-                    "strength": "tight",
-                    "effect": "easier",
-                    "note": "Public blessing softens tariff optics."
-                }
-            ]
-        },
-        {
-            "id": "r_gar_over",
-            "npc_id": "npc_garran",
-            "type": "over",
-            "title": "Fund Night Patrols",
-            "description": "Request coin to increase guard patrols after food-line scuffles.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": -1,
-                        "leverage": 0,
-                        "reputation": -1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Guard",
-                            "delta": -1
-                        }
-                    ],
-                    "flags_set": [
-                        {
-                            "key": "streets_thinly_patrolled",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 1,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 1
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Guard",
-                            "delta": 1
-                        }
-                    ],
-                    "flags_set": [
-                        {
-                            "key": "patrols_funded",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_gar_gray",
-                            "mode": "available"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Patrols protect Church soup lines first",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": [
-                                {
-                                    "key": "alms_funded",
-                                    "value": true
-                                }
-                            ]
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 2,
-                                "leverage": 0,
-                                "reputation": 2,
-                                "agenda": 1
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Guard",
-                                    "delta": 1
-                                },
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "soup_lines_safe",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": []
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_gar_gray",
-                    "strength": "tight",
-                    "effect": "available",
-                    "note": "With funding, Garran pursues quiet detentions."
-                }
-            ]
-        },
-        {
-            "id": "r_gar_under",
-            "npc_id": "npc_garran",
-            "type": "under",
-            "title": "Plant Evidence on Rival Fixer",
-            "description": "Frame a rival smuggler to break the docks’ black market.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [],
-                    "flags_set": [],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 1,
-                        "leverage": 2,
-                        "reputation": -3,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Guard",
-                            "delta": 1
-                        }
-                    ],
-                    "flags_set": [
-                        {
-                            "key": "rival_fixed",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_vex_over",
-                            "mode": "harder"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Trade: spare Vexa’s crew for Guard intel pipeline",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Smugglers",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": []
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 2,
-                                "leverage": 1,
-                                "reputation": -1,
-                                "agenda": 1
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Guard",
-                                    "delta": 1
-                                },
-                                {
-                                    "category": "Faction",
-                                    "value": "Smugglers",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "smugglers_feed_guard",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_vex_gray",
-                                    "mode": "easier"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_vex_over",
-                    "strength": "tight",
-                    "effect": "harder",
-                    "note": "Vexa faces heat after rival’s fall."
-                }
-            ]
-        },
-        {
-            "id": "r_gar_gray",
-            "npc_id": "npc_garran",
-            "type": "gray",
-            "title": "Quietly Detain Agitator",
-            "description": "Hold a rabble-rouser overnight without charges to calm the quarter.",
-            "options": {
-                "deny": {
-                    "resources_delta": {
-                        "favors": -1,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
-                    },
-                    "favors_delta": [
-                        {
-                            "category": "Faction",
-                            "value": "Guard",
-                            "delta": -1
-                        }
-                    ],
-                    "flags_set": [],
-                    "unlocks": []
-                },
-                "accept": {
-                    "resources_delta": {
-                        "favors": 0,
-                        "leverage": 1,
-                        "reputation": -1,
-                        "agenda": 1
-                    },
-                    "favors_delta": [],
-                    "flags_set": [
-                        {
-                            "key": "agitator_detained",
-                            "value": true
-                        }
-                    ],
-                    "unlocks": [
-                        {
-                            "request_id": "r_mal_over",
-                            "mode": "harder"
-                        }
-                    ]
-                },
-                "bargain": [
-                    {
-                        "label": "Release at dawn with Church mediation",
-                        "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 1,
-                                "agenda": 0
-                            },
-                            "favors_spend": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "amount": 1
-                                }
-                            ],
-                            "flags_required": []
-                        },
-                        "result": {
-                            "resources_delta": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 2,
-                                "agenda": 1
-                            },
-                            "favors_delta": [
-                                {
-                                    "category": "Faction",
-                                    "value": "Church",
-                                    "delta": 1
-                                }
-                            ],
-                            "flags_set": [
-                                {
-                                    "key": "church_mediated_release",
-                                    "value": true
-                                }
-                            ],
-                            "unlocks": [
-                                {
-                                    "request_id": "r_mal_gray",
-                                    "mode": "easier"
-                                }
-                            ]
-                        }
-                    }
-                ]
-            },
-            "links": [
-                {
-                    "on": "accept",
-                    "to_request_id": "r_mal_over",
+                    "to_request_id": "req_lyria_public_blessing",
                     "strength": "loose",
-                    "effect": "harder",
-                    "note": "Crackdown chills donations."
+                    "effect": "easier",
+                    "note": "Temple goodwill eases later appeal."
                 }
             ]
         },
         {
-            "id": "r_vex_over",
-            "npc_id": "npc_vexa",
-            "type": "over",
-            "title": "Petition for Warehouse License",
-            "description": "Seek a legal license to operate a riverside warehouse under guild oversight.",
+            "id": "req_mara_informant_trade",
+            "npc_id": "npc_mara_quayside_smuggler",
+            "title": "Names for Night Watch",
+            "request_text": "Could you trade me names from the night watch so I avoid their keenest eyes?",
+            "locked": false,
             "options": {
                 "deny": {
                     "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
+                        "reputation": 1
                     },
-                    "favors_delta": [],
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -5,
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "smugglers",
+                            "delta": 1
+                        }
+                    ],
                     "flags_set": [
                         {
-                            "key": "vexa_snubbed",
+                            "key": "flag_watch_names_leaked",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_rusk_reassign_watch"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Swap intel for ore routes",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "miners",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "reputation": -1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "smugglers",
+                                    "delta": 2
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_ore_routes_compromised",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_rusk_reassign_watch"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_rusk_reassign_watch",
+                    "strength": "tight",
+                    "effect": "modified",
+                    "note": "Rusk can shuffle patrols once leak is admitted."
+                }
+            ]
+        },
+        {
+            "id": "req_averin_gap_in_ledgers",
+            "npc_id": "npc_lord_averin_treasurer",
+            "title": "Plug a Small Ledger Gap",
+            "request_text": "Might you authorize a discreet transfer to conceal an irregular ledger gap?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_audit_risk_rises",
                             "value": true
                         }
                     ],
@@ -1112,71 +412,60 @@
                 },
                 "accept": {
                     "resources_delta": {
-                        "favors": 1,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 1
+                        "coins": -8,
+                        "reputation": 1
                     },
                     "favors_delta": [
                         {
-                            "category": "Faction",
-                            "value": "Smugglers",
+                            "tag": "nobility",
                             "delta": 1
                         }
                     ],
                     "flags_set": [
                         {
-                            "key": "license_granted",
+                            "key": "flag_gap_patched",
                             "value": true
                         }
                     ],
-                    "unlocks": []
+                    "unlocks": [
+                        "req_brinna_fast_disbursement"
+                    ]
                 },
                 "bargain": [
                     {
-                        "label": "License only if Guild sponsors compliance",
+                        "label": "Merchant consortium chip-in",
                         "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 0,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
                             "favors_spend": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Guild",
-                                    "amount": 1
+                                    "tag": "merchants",
+                                    "amount": 2
                                 }
-                            ],
-                            "flags_required": []
+                            ]
                         },
                         "result": {
                             "resources_delta": {
-                                "favors": 2,
-                                "leverage": 0,
-                                "reputation": 2,
-                                "agenda": 1
+                                "coins": -2,
+                                "reputation": 1
                             },
                             "favors_delta": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Smugglers",
-                                    "delta": 1
+                                    "tag": "merchants",
+                                    "delta": -1
                                 },
                                 {
-                                    "category": "Faction",
-                                    "value": "Guild",
+                                    "tag": "nobility",
                                     "delta": 1
                                 }
                             ],
                             "flags_set": [
                                 {
-                                    "key": "guild_surety",
+                                    "key": "flag_consortium_helped",
                                     "value": true
                                 }
                             ],
-                            "unlocks": []
+                            "unlocks": [
+                                "req_brinna_fast_disbursement"
+                            ]
                         }
                     }
                 ]
@@ -1184,31 +473,27 @@
             "links": [
                 {
                     "on": "deny",
-                    "to_request_id": "r_gar_under",
+                    "to_request_id": "req_brinna_fast_disbursement",
                     "strength": "loose",
-                    "effect": "available",
-                    "note": "Garran moves against docks when reform fails."
+                    "effect": "harder",
+                    "note": "Frozen funds slow Brinna’s office."
                 }
             ]
         },
         {
-            "id": "r_vex_under",
-            "npc_id": "npc_vexa",
-            "type": "under",
-            "title": "Slip Untaxed Spices Through Gate",
-            "description": "Move crates past the tariff wardens tonight.",
+            "id": "req_averin_tax_relief_masons",
+            "npc_id": "npc_lord_averin_treasurer",
+            "title": "Temporary Tax Relief for Masons",
+            "request_text": "Could you endorse a temporary tax relief for the masons to speed wall repairs?",
+            "locked": false,
             "options": {
                 "deny": {
                     "resources_delta": {
-                        "favors": -1,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
+                        "reputation": -1
                     },
                     "favors_delta": [
                         {
-                            "category": "Faction",
-                            "value": "Smugglers",
+                            "tag": "masons",
                             "delta": -1
                         }
                     ],
@@ -1217,80 +502,55 @@
                 },
                 "accept": {
                     "resources_delta": {
-                        "favors": 1,
-                        "leverage": 2,
-                        "reputation": -2,
-                        "agenda": 0
+                        "coins": -3,
+                        "reputation": 1
                     },
                     "favors_delta": [
                         {
-                            "category": "Faction",
-                            "value": "Smugglers",
-                            "delta": 1
+                            "tag": "masons",
+                            "delta": 2
                         }
                     ],
                     "flags_set": [
                         {
-                            "key": "contraband_passed",
+                            "key": "flag_mason_relief",
                             "value": true
                         }
                     ],
                     "unlocks": [
-                        {
-                            "request_id": "r_gar_gray",
-                            "mode": "harder"
-                        }
+                        "req_harl_overtime_crews"
                     ]
                 },
                 "bargain": [
                     {
-                        "label": "Cut the Guard in for a silent watch",
+                        "label": "Tie relief to noble donation",
                         "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
                             "favors_spend": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Guard",
+                                    "tag": "nobility",
                                     "amount": 1
                                 }
-                            ],
-                            "flags_required": []
+                            ]
                         },
                         "result": {
                             "resources_delta": {
-                                "favors": 2,
-                                "leverage": 1,
-                                "reputation": -1,
-                                "agenda": 0
+                                "coins": -1,
+                                "reputation": 1
                             },
                             "favors_delta": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Smugglers",
-                                    "delta": 1
-                                },
-                                {
-                                    "category": "Faction",
-                                    "value": "Guard",
+                                    "tag": "masons",
                                     "delta": 1
                                 }
                             ],
                             "flags_set": [
                                 {
-                                    "key": "guard_on_take",
+                                    "key": "flag_relief_with_patron",
                                     "value": true
                                 }
                             ],
                             "unlocks": [
-                                {
-                                    "request_id": "r_gar_over",
-                                    "mode": "easier"
-                                }
+                                "req_harl_overtime_crews"
                             ]
                         }
                     }
@@ -1299,103 +559,84 @@
             "links": [
                 {
                     "on": "accept",
-                    "to_request_id": "r_gar_gray",
+                    "to_request_id": "req_harl_overtime_crews",
                     "strength": "tight",
-                    "effect": "harder",
-                    "note": "Heat from smuggling spikes detentions."
-                },
-                {
-                    "on": "bargain",
-                    "to_request_id": "r_gar_over",
-                    "strength": "loose",
                     "effect": "easier",
-                    "note": "Guard complicit; asks for more budget cover."
+                    "note": "Cheaper to run extra crews with relief."
                 }
             ]
         },
         {
-            "id": "r_vex_gray",
-            "npc_id": "npc_vexa",
-            "type": "gray",
-            "title": "Trade Dossier on a Noble",
-            "description": "Offer damaging notes on an Upper noble in exchange for leniency later.",
+            "id": "req_averin_public_ledger",
+            "npc_id": "npc_lord_averin_treasurer",
+            "title": "Publish a Clean Ledger Page",
+            "request_text": "Would you have the scribe publish a clean ledger page to reassure the guilds?",
+            "locked": false,
             "options": {
                 "deny": {
                     "resources_delta": {
-                        "favors": 0,
-                        "leverage": 0,
-                        "reputation": 1,
-                        "agenda": 0
+                        "reputation": -1
                     },
-                    "favors_delta": [],
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": -1
+                        }
+                    ],
                     "flags_set": [],
                     "unlocks": []
                 },
                 "accept": {
                     "resources_delta": {
-                        "favors": 0,
-                        "leverage": 2,
-                        "reputation": -1,
-                        "agenda": 1
+                        "coins": -2,
+                        "reputation": 1
                     },
-                    "favors_delta": [],
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": 1
+                        }
+                    ],
                     "flags_set": [
                         {
-                            "key": "noble_compromised",
+                            "key": "flag_public_ledger",
                             "value": true
                         }
                     ],
                     "unlocks": [
-                        {
-                            "request_id": "r_ser_under",
-                            "mode": "easier"
-                        }
+                        "req_ephraim_archive_stamp"
                     ]
                 },
                 "bargain": [
                     {
-                        "label": "Swap for a formal Church clemency letter",
+                        "label": "Scholarly seal of assurance",
                         "requirements": {
-                            "resources_spend": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 0,
-                                "agenda": 0
-                            },
                             "favors_spend": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Church",
+                                    "tag": "scholars",
                                     "amount": 1
                                 }
-                            ],
-                            "flags_required": []
+                            ]
                         },
                         "result": {
                             "resources_delta": {
-                                "favors": 0,
-                                "leverage": 1,
-                                "reputation": 1,
-                                "agenda": 1
+                                "coins": -1,
+                                "reputation": 2
                             },
                             "favors_delta": [
                                 {
-                                    "category": "Faction",
-                                    "value": "Church",
+                                    "tag": "merchants",
                                     "delta": 1
                                 }
                             ],
                             "flags_set": [
                                 {
-                                    "key": "vexa_clemency_letter",
+                                    "key": "flag_seal_added",
                                     "value": true
                                 }
                             ],
                             "unlocks": [
-                                {
-                                    "request_id": "r_vex_over",
-                                    "mode": "easier"
-                                }
+                                "req_ephraim_archive_stamp"
                             ]
                         }
                     }
@@ -1404,11 +645,1903 @@
             "links": [
                 {
                     "on": "accept",
-                    "to_request_id": "r_ser_under",
+                    "to_request_id": "req_ephraim_archive_stamp",
                     "strength": "tight",
                     "effect": "easier",
-                    "note": "Compromised noble pressures Seraphine."
+                    "note": "Pre-cleared page speeds stamping."
                 }
+            ]
+        },
+        {
+            "id": "req_ephraim_archive_stamp",
+            "npc_id": "npc_brother_ephraim_scribe",
+            "title": "Archive Stamp for Legitimacy",
+            "request_text": "Might you obtain an archive stamp so this ledger page bears official weight?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -4,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_archive_stamped",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_lyria_public_blessing"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Clerical shortcut",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "clergy",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -2,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "scholars",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_clerical_shortcut",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_lyria_public_blessing"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "deny",
+                    "to_request_id": "req_lyria_public_blessing",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "No stamp weakens temple optics."
+                }
+            ]
+        },
+        {
+            "id": "req_ephraim_quiet_redaction",
+            "npc_id": "npc_brother_ephraim_scribe",
+            "title": "Quiet Redaction of a Name",
+            "request_text": "Could you permit a quiet redaction of a troublesome name from the court rolls?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -3,
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "nobility",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_name_redacted",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_tomas_apology_play"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Scholarly footnote instead",
+                        "requirements": {
+                            "coins_spend": 1,
+                            "favors_spend": [
+                                {
+                                    "tag": "scholars",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [],
+                            "flags_set": [
+                                {
+                                    "key": "flag_footnote_added",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_tomas_apology_play"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_tomas_apology_play",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Stage apology pairs with redaction."
+                }
+            ]
+        },
+        {
+            "id": "req_ephraim_copyist_overtime",
+            "npc_id": "npc_brother_ephraim_scribe",
+            "title": "Copyist Overtime",
+            "request_text": "Would you fund overtime for copyists so edicts go out by dawn?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [],
+                    "flags_set": [
+                        {
+                            "key": "flag_slow_edicts",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -4,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_overtime_paid",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_rusk_raid_warning"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Artisan ink sponsorship",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "artisans",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -2,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "artisans",
+                                    "delta": -1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_ink_sponsored",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_rusk_raid_warning"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_rusk_raid_warning",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Faster edicts improve patrol readiness."
+                }
+            ]
+        },
+        {
+            "id": "req_rusk_raid_warning",
+            "npc_id": "npc_captain_rusk_river_patrol",
+            "title": "Raid Warning Along the Bend",
+            "request_text": "Could you authorize riders to warn villages along the bend of a likely raid?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "riverfolk",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -6,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        },
+                        {
+                            "tag": "riverfolk",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_bend_warned",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_ira_secure_ore_convoy"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Riverfolk boats assist",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "riverfolk",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -3,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "guards",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_boats_mustered",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_ira_secure_ore_convoy"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "deny",
+                    "to_request_id": "req_ira_copper_levy",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "Unwarned villages suffer, miners resist levies."
+                }
+            ]
+        },
+        {
+            "id": "req_rusk_reassign_watch",
+            "npc_id": "npc_captain_rusk_river_patrol",
+            "title": "Reassign the Keen Watch",
+            "request_text": "Would you back reassigning my keenest watchmen to the river gates this week?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -3,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_watch_reassigned",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_mara_rare_cargo"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Dockhands volunteer rotation",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "dockhands",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "guards",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_dockhands_screening",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_mara_rare_cargo"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_mara_rare_cargo",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Less scrutiny at secondary gate helps Mara."
+                }
+            ]
+        },
+        {
+            "id": "req_rusk_confiscate_false_seals",
+            "npc_id": "npc_captain_rusk_river_patrol",
+            "title": "Confiscate False Seals",
+            "request_text": "Could you sanction a sweep to confiscate false seals among vendors?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -5,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_false_seals_swept",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_brinna_seal_reprint"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Merchants fund sweep",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "merchants",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "guards",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_merchants_backed_sweep",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_brinna_seal_reprint"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_brinna_seal_reprint",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Reprinting seals follows the sweep."
+                }
+            ]
+        },
+        {
+            "id": "req_lyria_public_blessing",
+            "npc_id": "npc_priestess_lyria_temple",
+            "title": "Public Blessing for Stability",
+            "request_text": "Would you arrange a public blessing so the people see order restored?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -2
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "clergy",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -7,
+                        "reputation": 2
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "clergy",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_blessing_done",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_tomas_grand_pageant"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Smaller rite with nobles",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "nobility",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -3,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "clergy",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_private_rite",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_tomas_grand_pageant"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_tomas_grand_pageant",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Blessing primes an audience for spectacle."
+                }
+            ]
+        },
+        {
+            "id": "req_lyria_food_alms",
+            "npc_id": "npc_priestess_lyria_temple",
+            "title": "Food Alms for the Wharf",
+            "request_text": "Could you spare coin for temple alms so hunger does not sour the wharf?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "riverfolk",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -4,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "clergy",
+                            "delta": 1
+                        },
+                        {
+                            "tag": "riverfolk",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_alms_funded",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_tomas_wharf_play"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Actors serve soup",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "actors",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -2,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "clergy",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_stage_soup",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_tomas_wharf_play"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "bargain",
+                    "to_request_id": "req_tomas_wharf_play",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Public goodwill boosts theatre at the docks."
+                }
+            ]
+        },
+        {
+            "id": "req_lyria_rebuke_smugglers",
+            "npc_id": "npc_priestess_lyria_temple",
+            "title": "Temple Rebuke of Smuggling",
+            "request_text": "May I issue a moral rebuke against smuggling from the temple steps?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "clergy",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_rebuke_made",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_rusk_confiscate_false_seals"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Name no names",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "smugglers",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "reputation": 0
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "smugglers",
+                                    "delta": 1
+                                },
+                                {
+                                    "tag": "clergy",
+                                    "delta": -1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_soft_rebuke",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_rusk_confiscate_false_seals"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_mara_safe_dock",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "Public rebuke increases scrutiny at docks."
+                }
+            ]
+        },
+        {
+            "id": "req_brinna_fast_disbursement",
+            "npc_id": "npc_brinna_coin_counter",
+            "title": "Fast-Track Disbursement",
+            "request_text": "Could you authorize fast-track disbursement to keep contractors loyal?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "artisans",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -5,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_fast_track_on",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_harl_overtime_crews"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Artisan consortium fronts cash",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "artisans",
+                                    "amount": 2
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "artisans",
+                                    "delta": -1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_artisan_float",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_harl_overtime_crews"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "deny",
+                    "to_request_id": "req_harl_overtime_crews",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "No fast cash makes overtime pricier."
+                }
+            ]
+        },
+        {
+            "id": "req_brinna_seal_reprint",
+            "npc_id": "npc_brinna_coin_counter",
+            "title": "Reprint Treasury Seals",
+            "request_text": "Might you fund a reprint of treasury seals to prevent forgeries?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -6,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_new_seals",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_averin_public_ledger"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Guild printer discount",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "artisans",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -3,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "merchants",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_printer_guild_used",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_averin_public_ledger"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_averin_public_ledger",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Clean seals support public ledger optics."
+                }
+            ]
+        },
+        {
+            "id": "req_brinna_side_ledger",
+            "npc_id": "npc_brinna_coin_counter",
+            "title": "Side Ledger for Expedites",
+            "request_text": "Could you authorize a side ledger for expedite fees to keep things moving?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "scholars",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_side_ledger_refused",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -2,
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_side_ledger_ok",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_averin_gap_in_ledgers"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Clergy oversight stamp",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "clergy",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [],
+                            "flags_set": [
+                                {
+                                    "key": "flag_side_ledger_sanitized",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_averin_gap_in_ledgers"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_averin_gap_in_ledgers",
+                    "strength": "tight",
+                    "effect": "modified",
+                    "note": "Creates context for Averin’s gap fix."
+                }
+            ]
+        },
+        {
+            "id": "req_harl_overtime_crews",
+            "npc_id": "npc_harl_stonebreaker",
+            "title": "Overtime Crews on the Wall",
+            "request_text": "Could you fund overtime crews so we may set new stone before the rains?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "masons",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_wall_slows",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -7,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "masons",
+                            "delta": 2
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_overtime_crews_active",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_harl_quarry_perm"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Dockhands haul stone",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "dockhands",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -4,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "masons",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_dockhands_hauling",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_harl_quarry_perm"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_harl_quarry_perm",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Momentum justifies new quarry permit."
+                }
+            ]
+        },
+        {
+            "id": "req_harl_quarry_perm",
+            "npc_id": "npc_harl_stonebreaker",
+            "title": "Temporary Quarry Permit",
+            "request_text": "Would you obtain a temporary quarry permit so we tap fresh stone near the river?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "artisans",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -5,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "masons",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_quarry_temp",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_ira_secure_ore_convoy"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Noble surety bond",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "nobility",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -2,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "masons",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_noble_surety",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_ira_secure_ore_convoy"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_ira_secure_ore_convoy",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Convoys need escort after quarry opens."
+                }
+            ]
+        },
+        {
+            "id": "req_harl_wall_inspection",
+            "npc_id": "npc_harl_stonebreaker",
+            "title": "Royal Wall Inspection",
+            "request_text": "Could you arrange a royal inspection to boost worker morale and loosen purses?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "nobility",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -3,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "masons",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_inspection_done",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_tomas_apology_play"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Theatre troupe accompanies",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "actors",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 2
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "masons",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_troupe_at_wall",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_tomas_apology_play"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "bargain",
+                    "to_request_id": "req_tomas_apology_play",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Public mood improved for staged apology."
+                }
+            ]
+        },
+        {
+            "id": "req_tomas_apology_play",
+            "npc_id": "npc_tomas_stagewright",
+            "title": "Staged Apology to Soothe Tempers",
+            "request_text": "Might you permit a brief stage play that apologizes for recent missteps at court?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "actors",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -4,
+                        "reputation": 2
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "actors",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_apology_play_done",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_tomas_grand_pageant"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Sponsor by merchants",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "merchants",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 2
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "actors",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_merchant_sponsor",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_tomas_grand_pageant"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_tomas_grand_pageant",
+                    "strength": "tight",
+                    "effect": "easier",
+                    "note": "Apology paves way for pageant."
+                }
+            ]
+        },
+        {
+            "id": "req_tomas_wharf_play",
+            "npc_id": "npc_tomas_stagewright",
+            "title": "Wharfside Morality Play",
+            "request_text": "Could you license a small morality play at the wharf to calm tempers?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "riverfolk",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -2,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "actors",
+                            "delta": 1
+                        },
+                        {
+                            "tag": "riverfolk",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_wharf_play_done",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_rusk_raid_warning"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Clergy preface the play",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "clergy",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "actors",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_clergy_preface",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_rusk_raid_warning"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_rusk_raid_warning",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Calm wharf aids warning riders."
+                }
+            ]
+        },
+        {
+            "id": "req_tomas_grand_pageant",
+            "npc_id": "npc_tomas_stagewright",
+            "title": "Grand Pageant of Unity",
+            "request_text": "Would you fund a grand pageant to display unity between guilds and crown?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -2
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "actors",
+                            "delta": -1
+                        },
+                        {
+                            "tag": "nobility",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -10,
+                        "reputation": 3
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "actors",
+                            "delta": 2
+                        },
+                        {
+                            "tag": "nobility",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_pageant_done",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_averin_public_ledger"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Guild banners reduce cost",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "artisans",
+                                    "amount": 1
+                                },
+                                {
+                                    "tag": "merchants",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -6,
+                                "reputation": 3
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "actors",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_guild_banners",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_averin_public_ledger"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_averin_public_ledger",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Public unity improves ledger reception."
+                }
+            ]
+        },
+        {
+            "id": "req_ira_copper_levy",
+            "npc_id": "npc_ira_coppervein",
+            "title": "Copper Levy Adjustment",
+            "request_text": "Could you ease the new copper levy so wages don’t revolt?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "miners",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -4,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "miners",
+                            "delta": 2
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_levy_eased",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_ira_secure_ore_convoy"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Merchants subsidize levy",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "merchants",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -1,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "miners",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_levy_subsidy",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_ira_secure_ore_convoy"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "deny",
+                    "to_request_id": "req_rusk_raid_warning",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "Angry miners less likely to help patrols."
+                }
+            ]
+        },
+        {
+            "id": "req_ira_secure_ore_convoy",
+            "npc_id": "npc_ira_coppervein",
+            "title": "Secure Ore Convoy",
+            "request_text": "Would you assign escorts so our ore convoy reaches the foundry intact?",
+            "locked": true,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": -1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": -1
+                        },
+                        {
+                            "tag": "miners",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -8,
+                        "reputation": 2
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "guards",
+                            "delta": 1
+                        },
+                        {
+                            "tag": "miners",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_convoy_secured",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_mara_informant_trade"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Riverfolk pilots guide barges",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "riverfolk",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -5,
+                                "reputation": 2
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "miners",
+                                    "delta": 1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_pilots_guided",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_mara_informant_trade"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_mara_informant_trade",
+                    "strength": "loose",
+                    "effect": "harder",
+                    "note": "Smugglers seek watchman names after escorts tighten."
+                }
+            ]
+        },
+        {
+            "id": "req_ira_foundry_upgrade",
+            "npc_id": "npc_ira_coppervein",
+            "title": "Foundry Crucible Upgrade",
+            "request_text": "Might you fund better crucibles so spillage stops eating our profit?",
+            "locked": false,
+            "options": {
+                "deny": {
+                    "resources_delta": {
+                        "reputation": 0
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "artisans",
+                            "delta": -1
+                        }
+                    ],
+                    "flags_set": [],
+                    "unlocks": []
+                },
+                "accept": {
+                    "resources_delta": {
+                        "coins": -5,
+                        "reputation": 1
+                    },
+                    "favors_delta": [
+                        {
+                            "tag": "merchants",
+                            "delta": 1
+                        }
+                    ],
+                    "flags_set": [
+                        {
+                            "key": "flag_crucibles_upgraded",
+                            "value": true
+                        }
+                    ],
+                    "unlocks": [
+                        "req_brinna_fast_disbursement"
+                    ]
+                },
+                "bargain": [
+                    {
+                        "label": "Artisan co-op discount",
+                        "requirements": {
+                            "favors_spend": [
+                                {
+                                    "tag": "artisans",
+                                    "amount": 1
+                                }
+                            ]
+                        },
+                        "result": {
+                            "resources_delta": {
+                                "coins": -2,
+                                "reputation": 1
+                            },
+                            "favors_delta": [
+                                {
+                                    "tag": "artisans",
+                                    "delta": -1
+                                }
+                            ],
+                            "flags_set": [
+                                {
+                                    "key": "flag_coop_discount",
+                                    "value": true
+                                }
+                            ],
+                            "unlocks": [
+                                "req_brinna_fast_disbursement"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "links": [
+                {
+                    "on": "accept",
+                    "to_request_id": "req_brinna_fast_disbursement",
+                    "strength": "loose",
+                    "effect": "easier",
+                    "note": "Improved output justifies quick payments."
+                }
+            ]
+        }
+    ],
+    "days": [
+        {
+            "day": 1,
+            "requests": [
+                "req_mara_safe_dock",
+                "req_averin_tax_relief_masons",
+                "req_ephraim_copyist_overtime",
+                "req_lyria_food_alms",
+                "req_harl_wall_inspection"
+            ]
+        },
+        {
+            "day": 2,
+            "requests": [
+                "req_brinna_side_ledger",
+                "req_averin_public_ledger",
+                "req_rusk_confiscate_false_seals",
+                "req_ira_copper_levy",
+                "req_ira_foundry_upgrade"
+            ]
+        },
+        {
+            "day": 3,
+            "requests": [
+                "req_mara_informant_trade",
+                "req_ephraim_quiet_redaction",
+                "req_lyria_rebuke_smugglers",
+                "req_tomas_apology_play",
+                "req_brinna_fast_disbursement"
+            ]
+        },
+        {
+            "day": 4,
+            "requests": [
+                "req_mara_rare_cargo",
+                "req_ephraim_archive_stamp",
+                "req_rusk_reassign_watch",
+                "req_brinna_seal_reprint",
+                "req_harl_overtime_crews"
+            ]
+        },
+        {
+            "day": 5,
+            "requests": [
+                "req_rusk_raid_warning",
+                "req_lyria_public_blessing",
+                "req_tomas_wharf_play",
+                "req_tomas_grand_pageant",
+                "req_harl_quarry_perm"
             ]
         }
     ],
@@ -1416,68 +2549,58 @@
         "game_log": [
             {
                 "day": 1,
-                "request_id": "r_ser_over",
-                "choice": "accept",
-                "bargain_label": null,
-                "immediate_consequence": "Bread prices stabilize; goodwill rises.",
+                "request_id": "req_averin_tax_relief_masons",
+                "choice": "bargain",
+                "bargain_label": "Tie relief to noble donation",
+                "immediate_consequence": "Low coin spend, slight mason favor, opens overtime crews later.",
                 "resources_delta": {
-                    "favors": 1,
-                    "leverage": 0,
-                    "reputation": 2,
-                    "agenda": 1
+                    "coins": -1,
+                    "reputation": 1
                 },
                 "favors_delta": [
                     {
-                        "category": "Faction",
-                        "value": "Guild",
+                        "tag": "masons",
                         "delta": 1
                     }
                 ],
-                "next_request_id": "r_mal_over",
+                "next_request_id": null,
                 "predictable": true
             },
             {
                 "day": 2,
-                "request_id": "r_mal_over",
-                "choice": "bargain",
-                "bargain_label": "Fund if Church publicly praises the Advisor",
-                "immediate_consequence": "Church praises the Advisor; alms funded.",
+                "request_id": "req_averin_public_ledger",
+                "choice": "accept",
+                "bargain_label": null,
+                "immediate_consequence": "Coins spent to publish ledger; unlocks archive stamp.",
                 "resources_delta": {
-                    "favors": 1,
-                    "leverage": 0,
-                    "reputation": 3,
-                    "agenda": 2
+                    "coins": -2,
+                    "reputation": 1
                 },
                 "favors_delta": [
                     {
-                        "category": "Faction",
-                        "value": "Church",
+                        "tag": "merchants",
                         "delta": 1
                     }
                 ],
-                "next_request_id": "r_ser_gray",
+                "next_request_id": "req_ephraim_archive_stamp",
                 "predictable": true
             },
             {
                 "day": 3,
-                "request_id": "r_ser_gray",
-                "choice": "bargain",
-                "bargain_label": "Public consultation staged by Church",
-                "immediate_consequence": "Tariff passed with staged consultation; optics improved.",
+                "request_id": "req_brinna_fast_disbursement",
+                "choice": "deny",
+                "bargain_label": null,
+                "immediate_consequence": "Artisans annoyed; overtime later gets tougher.",
                 "resources_delta": {
-                    "favors": 0,
-                    "leverage": 1,
-                    "reputation": 1,
-                    "agenda": 2
+                    "reputation": -1
                 },
                 "favors_delta": [
                     {
-                        "category": "Faction",
-                        "value": "Church",
-                        "delta": 1
+                        "tag": "artisans",
+                        "delta": -1
                     }
                 ],
-                "next_request_id": "r_vex_under",
+                "next_request_id": "req_harl_overtime_crews",
                 "predictable": true
             }
         ]
@@ -1485,27 +2608,34 @@
     "example_player_path": {
         "steps": [
             {
-                "request_id": "r_vex_under",
+                "request_id": "req_mara_safe_dock",
                 "choice": "bargain",
-                "bargain_label": "Cut the Guard in for a silent watch",
-                "reason": "Convert a risky smuggle into mutual dependency with the Guard.",
-                "aftereffects": "Gain favors with Guard and Smugglers, slight reputation hit; Guard later asks for more budget, which you can support."
+                "bargain_label": "Ask for cut of profits",
+                "reason": "Preserve coins early while gaining smuggler leverage and a small payout.",
+                "aftereffects": "Gain 2 coins now, smuggler favor rises, unlocks rare cargo later; Rusk grows wary."
             },
             {
-                "request_id": "r_gar_over",
+                "request_id": "req_averin_public_ledger",
                 "choice": "bargain",
-                "bargain_label": "Patrols protect Church soup lines first",
-                "reason": "Leverage Church favor to turn funding into visible public good.",
-                "aftereffects": "Public safety improves around alms; both Guard and Church owe you."
+                "bargain_label": "Scholarly seal of assurance",
+                "reason": "Cheaper legitimacy boost that primes later archive stamp.",
+                "aftereffects": "Spend 1 coin; merchants calm; archive stamp becomes easier next day."
             },
             {
-                "request_id": "r_vex_gray",
+                "request_id": "req_rusk_raid_warning",
+                "choice": "bargain",
+                "bargain_label": "Riverfolk boats assist",
+                "reason": "Use riverfolk favors to cut coin cost on a high-impact security action.",
+                "aftereffects": "Spend 3 coins; guards favor rises; ore convoy unlocks and is safer."
+            },
+            {
+                "request_id": "req_tomas_grand_pageant",
                 "choice": "accept",
                 "bargain_label": null,
-                "reason": "Bank leverage on a compromised noble for future court maneuvers.",
-                "aftereffects": "Leverage spikes; Seraphine becomes more pliable for ledger favors."
+                "reason": "Late-game reputation spike to cement stability.",
+                "aftereffects": "Spend 10 coins; large reputation gain; boosts acceptance of public ledger narratives."
             }
         ],
-        "summary": "Player engineers a Guard–Smuggler–Church triangle to stabilize streets, earn cross-faction favors, and accumulate leverage for court manipulation."
+        "summary": "The path leans on early smuggler bargain for coin relief, legitimizes finances with scholarly optics, shifts mid-game to river security using favors to save coins, and finishes with a costly but powerful pageant to secure reputation and stabilize the realm."
     }
 }
