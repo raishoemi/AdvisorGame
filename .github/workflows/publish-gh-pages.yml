@@ -22,44 +22,33 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # (Optional but speeds up builds a lot)
-      - name: Cache Library
-        uses: actions/cache@v4
-        with:
-          path: Library
-          key: Library-WebGL-${{ hashFiles('**/Packages/manifest.json') }}
-          restore-keys: |
-            Library-WebGL-
-            Library-
-
-      # Activate Unity (choose ONE method)
-      # A) With license file stored in repo secret UNITY_LICENSE (ULF content)
       - name: Activate Unity
         uses: game-ci/unity-activate@v2
         with:
-          unityLicense: ${{ secrets.UNITY_LICENSE }}
+          unityEmail: ${{ secrets.UNITY_EMAIL }}
+          unityPassword: ${{ secrets.UNITY_PASSWORD }}
 
-      # B) Or with credentials/serial (for Pro/Plus); see docs
-      # - uses: game-ci/unity-activate@v2
-      #   with:
-      #     unityEmail: ${{ secrets.UNITY_EMAIL }}
-      #     unityPassword: ${{ secrets.UNITY_PASSWORD }}
-      #     unitySerial: ${{ secrets.UNITY_SERIAL }}
 
-      # Build WebGL (auto-detects Unity version from ProjectSettings)
       - name: Build (WebGL)
         uses: game-ci/unity-builder@v4
         with:
           targetPlatform: WebGL
-          projectPath: .
+          projectPath: Game/Naknik
           buildName: WebGLBuild
           buildPath: build
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/WebGL/WebGLBuild
+
 
       # Package the WebGL build for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: build/WebGL/WebGLBuild
+
 
   deploy:
     runs-on: ubuntu-latest
