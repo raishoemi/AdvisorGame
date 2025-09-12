@@ -20,30 +20,45 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Activate Unity
-        uses: game-ci/unity-activate@v2
+      - name: Checkout repository
+        uses: actions/checkout@v4
         with:
-          unityEmail: ${{ secrets.UNITY_EMAIL }}
-          unityPassword: ${{ secrets.UNITY_PASSWORD }}
+          lfs: true
+      
+      - uses: actions/cache@v3
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+      - name: Cache Unity Library
+        uses: actions/cache@v4
+        with:
+          path: Game/Naknik/Library
+          key: ${{ runner.os }}-unity-WebGL-${{ hashFiles(
+            'Game/Naknik/Packages/manifest.json',
+            'Game/Naknik/Packages/packages-lock.json',
+            'Game/Naknik/ProjectSettings/ProjectVersion.txt'
+            ) }}
+          restore-keys: |
+            ${{ runner.os }}-unity-WebGL-
+            ${{ runner.os }}-unity-
+
 
 
       - name: Build (WebGL)
         uses: game-ci/unity-builder@v4
+        env:
+          UNITY_LICENSE: ${{ secrets.UNITY_LICENSE }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
         with:
           targetPlatform: WebGL
           projectPath: Game/Naknik
           buildName: WebGLBuild
           buildPath: build
 
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/WebGL/WebGLBuild
 
-
-      # Package the WebGL build for GitHub Pages
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
