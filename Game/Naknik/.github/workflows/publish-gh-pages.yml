@@ -3,7 +3,7 @@ name: Build & Deploy WebGL to GitHub Pages
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   workflow_dispatch:
 
 # Required for Pages deployments
