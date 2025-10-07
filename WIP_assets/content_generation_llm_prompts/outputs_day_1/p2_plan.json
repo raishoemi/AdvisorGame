@@ -1,0 +1,512 @@
+{
+    "p2_plan": {
+        "schema_version": "p2.1",
+        "from_state_digest": true,
+        "version": "2.2",
+        "day_meta": {
+            "index": 1,
+            "strikes_policy": {
+                "max_strikes": 3
+            },
+            "escalation": {
+                "trend": "steady_increase",
+                "day_difficulty_step": 0
+            }
+        },
+        "tag_pool": [
+            "court_aspirant",
+            "river_factor",
+            "shadow_ledger",
+            "guild_pressure",
+            "bread_shortfall",
+            "tithe_keeper"
+        ],
+        "npcs_used": [
+            "npc_owen_barge_master",
+            "npc_yakob_miller",
+            "npc_marta_guild_beadle",
+            "npc_lady_mirelle_patron",
+            "npc_seren_night_factor"
+        ],
+        "requests": [
+            {
+                "id": "req_clear_barge_lane",
+                "order": 1,
+                "npc_id": "npc_owen_barge_master",
+                "title_seed": "Clear the channel, pay the right hands",
+                "npc_voice_hint": "gruff, practical; speaks in schedules and loads",
+                "text_seed": "Moorage’s tight. Buy me a priority slot and I’ll run two turns before dusk. You’ll have your cut.",
+                "tags": [
+                    "river_factor",
+                    "guild_pressure"
+                ],
+                "shape": "direct",
+                "provides": {
+                    "flags_set": [
+                        "barge_priority",
+                        "harbor_weather_watch",
+                        "customs_favor"
+                    ],
+                    "reputation": {
+                        "commoners": 0,
+                        "nobles": 0,
+                        "guilds": 1
+                    },
+                    "favors_gain_estimate": 0,
+                    "coins_touch_expectation": "both"
+                },
+                "assists": [
+                    {
+                        "targets": [
+                            "req_rush_grain_subsidy"
+                        ],
+                        "via": [
+                            "barge_priority"
+                        ]
+                    },
+                    {
+                        "targets": [
+                            "req_night_window_run"
+                        ],
+                        "via": [
+                            "customs_favor"
+                        ]
+                    }
+                ],
+                "cost_pressure_forecast": {
+                    "coins_min": 0,
+                    "favors_min": 0,
+                    "notes": "Small facilitation fee; potential deferred dock dividend"
+                },
+                "option_blueprints": {
+                    "accept": {
+                        "coins_delta_range": [
+                            0,
+                            3
+                        ],
+                        "payout_bias": "safe_low",
+                        "notes": "Guarantees a minor fee from reslotting"
+                    },
+                    "bargains": [
+                        {
+                            "id": "dockline_priority",
+                            "risk": {
+                                "success_chance": 0.6,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "harbor_weather_watch": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "customs_favor": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "coins_delta_range": [
+                                3,
+                                8
+                            ],
+                            "gates_if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 1
+                                    }
+                                }
+                            },
+                            "notes": "Buy moorage preference; sell throughput"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "req_rush_grain_subsidy",
+                "order": 2,
+                "npc_id": "npc_yakob_miller",
+                "title_seed": "Rush the grind, steady the price",
+                "npc_voice_hint": "anxious but eager; counts sacks out loud",
+                "text_seed": "Give me coin for night milling and I’ll keep loaves steady. You can skim the Crown’s relief stipend.",
+                "tags": [
+                    "bread_shortfall",
+                    "guild_pressure"
+                ],
+                "shape": "conversion",
+                "provides": {
+                    "flags_set": [
+                        "granary_release",
+                        "market_relief"
+                    ],
+                    "reputation": {
+                        "commoners": 1,
+                        "nobles": 0,
+                        "guilds": 0
+                    },
+                    "favors_gain_estimate": 0,
+                    "coins_touch_expectation": "immediate"
+                },
+                "assists": [
+                    {
+                        "targets": [
+                            "req_salon_introduction"
+                        ],
+                        "via": [
+                            "rep_commoners>0",
+                            "market_relief"
+                        ]
+                    }
+                ],
+                "cost_pressure_forecast": {
+                    "coins_min": 0,
+                    "favors_min": 0,
+                    "notes": "Low-risk stipend skimming; better with earlier river timing"
+                },
+                "option_blueprints": {
+                    "accept": {
+                        "coins_delta_range": [
+                            1,
+                            3
+                        ],
+                        "payout_bias": "safe_low",
+                        "notes": "Take modest coordination fee from relief"
+                    },
+                    "bargains": [
+                        {
+                            "id": "night_milling_push",
+                            "risk": {
+                                "success_chance": 0.65,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "barge_priority": true
+                                            }
+                                        },
+                                        "delta": 0.15
+                                    }
+                                ]
+                            },
+                            "coins_delta_range": [
+                                3,
+                                7
+                            ],
+                            "gates_if": {},
+                            "notes": "Throughput improves stipend margin"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "req_charter_grace_window",
+                "order": 3,
+                "npc_id": "npc_marta_guild_beadle",
+                "title_seed": "Charter grace for fines and quotas",
+                "npc_voice_hint": "officious, clipped; cites clauses and penalties",
+                "text_seed": "I can space the fines across terms—for a consideration. Your office takes a handling cut today.",
+                "tags": [
+                    "guild_pressure",
+                    "court_aspirant"
+                ],
+                "shape": "deferred_payment",
+                "if": {
+                    "any": [
+                        {
+                            "reputations": {
+                                "guilds": {
+                                    "moreThan": 0
+                                }
+                            }
+                        },
+                        {
+                            "flags": {
+                                "barge_priority": true
+                            }
+                        }
+                    ]
+                },
+                "provides": {
+                    "flags_set": [
+                        "charter_audit_cleared",
+                        "quota_push"
+                    ],
+                    "reputation": {
+                        "commoners": 0,
+                        "nobles": 0,
+                        "guilds": 1
+                    },
+                    "favors_gain_estimate": 0,
+                    "coins_touch_expectation": "both"
+                },
+                "assists": [
+                    {
+                        "targets": [
+                            "req_night_window_run"
+                        ],
+                        "via": [
+                            "charter_audit_cleared"
+                        ]
+                    },
+                    {
+                        "targets": [
+                            "req_salon_introduction"
+                        ],
+                        "via": [
+                            "rep_guilds>0"
+                        ]
+                    }
+                ],
+                "cost_pressure_forecast": {
+                    "coins_min": 1,
+                    "favors_min": 0,
+                    "notes": "Small upfront sweetener; deferred cut from spaced fines"
+                },
+                "option_blueprints": {
+                    "accept": {
+                        "coins_delta_range": [
+                            0,
+                            2
+                        ],
+                        "payout_bias": "safe_low",
+                        "notes": "Clerical handling fee collected now"
+                    },
+                    "bargains": [
+                        {
+                            "id": "audit_spacing_brokerage",
+                            "risk": {
+                                "success_chance": 0.6,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "reputations": {
+                                                "guilds": {
+                                                    "moreThan": 0
+                                                }
+                                            }
+                                        },
+                                        "delta": 0.15
+                                    }
+                                ]
+                            },
+                            "coins_delta_range": [
+                                2,
+                                6
+                            ],
+                            "gates_if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 1
+                                    }
+                                }
+                            },
+                            "notes": "Turn quota relief into immediate brokerage coin"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "req_salon_introduction",
+                "order": 4,
+                "npc_id": "npc_lady_mirelle_patron",
+                "title_seed": "A seat at Lady Mirelle’s salon",
+                "npc_voice_hint": "polished, a touch impatient; expects deference",
+                "text_seed": "Sponsor a poet and I open my salon to your petitions. Properly presented, such favors return.",
+                "tags": [
+                    "court_aspirant",
+                    "tithe_keeper"
+                ],
+                "shape": "investment",
+                "if": {
+                    "resources": {
+                        "coins": {
+                            "atLeast": 2
+                        }
+                    }
+                },
+                "provides": {
+                    "flags_set": [
+                        "court_introductions",
+                        "hall_audience_slot",
+                        "patronage_route"
+                    ],
+                    "reputation": {
+                        "commoners": 0,
+                        "nobles": 1,
+                        "guilds": 0
+                    },
+                    "favors_gain_estimate": 0,
+                    "coins_touch_expectation": "deferred"
+                },
+                "assists": [
+                    {
+                        "targets": [
+                            "req_night_window_run"
+                        ],
+                        "via": [
+                            "court_introductions",
+                            "hall_audience_slot"
+                        ]
+                    }
+                ],
+                "cost_pressure_forecast": {
+                    "coins_min": 2,
+                    "favors_min": 0,
+                    "notes": "Upfront patronage; downstream access improves high-variance plays"
+                },
+                "option_blueprints": {
+                    "accept": {
+                        "coins_delta_range": [
+                            -1,
+                            0
+                        ],
+                        "payout_bias": "safe_low",
+                        "notes": "Symbolic gift; minimal exposure if funds are thin"
+                    },
+                    "bargains": [
+                        {
+                            "id": "salon_patronage_bundle",
+                            "risk": {
+                                "success_chance": 0.55,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "reputations": {
+                                                "commoners": {
+                                                    "moreThan": 0
+                                                }
+                                            }
+                                        },
+                                        "delta": 0.05
+                                    }
+                                ]
+                            },
+                            "coins_delta_range": [
+                                0,
+                                10
+                            ],
+                            "gates_if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 2
+                                    }
+                                }
+                            },
+                            "notes": "Prestige converts to future coin via introductions"
+                        }
+                    ]
+                }
+            },
+            {
+                "id": "req_night_window_run",
+                "order": 5,
+                "npc_id": "npc_seren_night_factor",
+                "title_seed": "Move the sealed crates by night",
+                "npc_voice_hint": "silky, amused; speaks in favors owed and doors unlocked",
+                "text_seed": "With the right doors ajar, we pass unseen and take a rich margin. You provide the cover.",
+                "tags": [
+                    "shadow_ledger",
+                    "river_factor"
+                ],
+                "shape": "brokered_chain",
+                "if": {
+                    "resources": {
+                        "coins": {
+                            "atLeast": 1
+                        }
+                    }
+                },
+                "provides": {
+                    "flags_set": [
+                        "black_book",
+                        "quiet_guards"
+                    ],
+                    "reputation": {
+                        "commoners": 0,
+                        "nobles": 0,
+                        "guilds": 0
+                    },
+                    "favors_gain_estimate": 0,
+                    "coins_touch_expectation": "both"
+                },
+                "assists": [],
+                "cost_pressure_forecast": {
+                    "coins_min": 1,
+                    "favors_min": 0,
+                    "notes": "Bribes at gate; payout on delivery if chain holds"
+                },
+                "option_blueprints": {
+                    "accept": {
+                        "coins_delta_range": [
+                            0,
+                            2
+                        ],
+                        "payout_bias": "safe_low",
+                        "notes": "Light skim from routine after-hours routing"
+                    },
+                    "bargains": [
+                        {
+                            "id": "sealed_crates_push",
+                            "risk": {
+                                "success_chance": 0.5,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "barge_priority": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "court_introductions": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "charter_audit_cleared": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "coins_delta_range": [
+                                5,
+                                12
+                            ],
+                            "gates_if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 1
+                                    }
+                                }
+                            },
+                            "notes": "High-margin covert chain improved by earlier setup"
+                        }
+                    ]
+                }
+            }
+        ],
+        "sequencing_rationale": [
+            "req_clear_barge_lane sets throughput flags boosting req_rush_grain_subsidy and enabling covert logistics for req_night_window_run",
+            "req_rush_grain_subsidy raises commoners rep and stability, improving reception for req_salon_introduction",
+            "req_charter_grace_window eases guild pressure, lowering scrutiny for req_night_window_run and smoothing court optics for req_salon_introduction",
+            "req_salon_introduction grants court access flags that raise the ceiling on req_night_window_run payouts",
+            "Skips remain viable but reduce late success chances and payout ranges"
+        ],
+        "safety_paths": [
+            "Even if two earlier requests are skipped, req_rush_grain_subsidy and the accept options on req_clear_barge_lane provide low-risk immediate coin to avoid cascading failures"
+        ]
+    }
+}

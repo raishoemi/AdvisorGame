@@ -1,0 +1,868 @@
+{
+    "p4_day_fixed": {
+        "schema_version": "p4.1",
+        "from_p3": true,
+        "version": "2.2",
+        "day": {
+            "index": 2,
+            "requests": [
+                {
+                    "id": "req_morning_tide_slot",
+                    "order": 1,
+                    "npc_id": "npc_owen_barge_master",
+                    "title": "Buy the Morning Tide Slot",
+                    "text": "Dawn moorage is the whole game, advisor. Stake the fee and I’ll turn two loads before noon—your office skims the clean throughput.",
+                    "tags": [
+                        "river_factor",
+                        "guild_pressure"
+                    ],
+                    "options": [
+                        {
+                            "id": "opt_accept_morning",
+                            "type": "accept",
+                            "label": "Accept",
+                            "risk": {
+                                "success_chance": 1.0,
+                                "chance_modifiers": []
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 1,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 0,
+                                    "nobles": 0,
+                                    "guilds": 1
+                                },
+                                "flags_set": [
+                                    "barge_priority",
+                                    "harbor_weather_watch",
+                                    "customs_favor"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 1,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {}
+                        },
+                        {
+                            "id": "opt_dockline_priority_push",
+                            "type": "bargain",
+                            "label": "Bargain: Buy priority, sell extra turns",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 1
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.6,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "harbor_weather_watch": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "customs_favor": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 1,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -1,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": 0
+                                },
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 5,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": 1
+                                },
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 3,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": -1
+                                }
+                            }
+                        },
+                        {
+                            "id": "opt_tide_block_swap",
+                            "type": "bargain",
+                            "label": "Bargain: Swap a rival’s block for ours",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 2
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.55,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "barge_priority": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 2,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": 0
+                                },
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 6,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": 1
+                                },
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 2,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -3,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": -1
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "req_steady_loaves_push",
+                    "order": 2,
+                    "npc_id": "npc_rotem_wharf_baker",
+                    "title": "Steady the Wharf Loaves",
+                    "text": "Morning, love—front me a little and I’ll fire the ovens through the night; cheap loaves keep tempers cool and we split the stipend trickle.",
+                    "tags": [
+                        "bread_shortfall",
+                        "river_factor"
+                    ],
+                    "options": [
+                        {
+                            "id": "opt_accept_loaves",
+                            "type": "accept",
+                            "label": "Accept",
+                            "risk": {
+                                "success_chance": 1.0,
+                                "chance_modifiers": []
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 2,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 1,
+                                    "nobles": 0,
+                                    "guilds": 0
+                                },
+                                "flags_set": [
+                                    "granary_release",
+                                    "market_relief"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 0,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {}
+                        },
+                        {
+                            "id": "opt_night_bake_rush",
+                            "type": "bargain",
+                            "label": "Bargain: Night-bake rush on relief price",
+                            "risk": {
+                                "success_chance": 0.65,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "barge_priority": true
+                                            }
+                                        },
+                                        "delta": 0.15
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 4,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 1
+                                },
+                                "flags_set": [
+                                    "market_relief"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 2,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 0,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -1,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": -1
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "req_audit_grace_extension",
+                    "order": 3,
+                    "npc_id": "npc_marta_guild_beadle",
+                    "title": "Extend Audit Grace on Fines",
+                    "text": "By charter clause, spacing is permitted with cause. Authorize my grace window, and a handling cut shall post to your line today.",
+                    "tags": [
+                        "guild_pressure",
+                        "court_aspirant"
+                    ],
+                    "if": {
+                        "any": [
+                            {
+                                "reputations": {
+                                    "guilds": {
+                                        "moreThan": 0
+                                    }
+                                }
+                            },
+                            {
+                                "flags": {
+                                    "barge_priority": true
+                                }
+                            }
+                        ]
+                    },
+                    "options": [
+                        {
+                            "id": "opt_accept_audit",
+                            "type": "accept",
+                            "label": "Accept",
+                            "risk": {
+                                "success_chance": 1.0,
+                                "chance_modifiers": []
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 1,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 0,
+                                    "nobles": 0,
+                                    "guilds": 1
+                                },
+                                "flags_set": [
+                                    "charter_audit_cleared",
+                                    "quota_push"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 1,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {}
+                        },
+                        {
+                            "id": "opt_grace_window_brokerage",
+                            "type": "bargain",
+                            "label": "Bargain: Broker spaced dues for immediate cut",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 2
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.6,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "reputations": {
+                                                "guilds": {
+                                                    "moreThan": 0
+                                                }
+                                            }
+                                        },
+                                        "delta": 0.15
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 2,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -1,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": 1
+                                },
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 5,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 3,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": -1
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "req_page_audience_pass",
+                    "order": 4,
+                    "npc_id": "npc_tomas_court_page",
+                    "title": "Quiet Audience Pass",
+                    "text": "If you sponsor a tasteful diversion, I can float your note to the top. Discretion assured—and doors open, softly.",
+                    "tags": [
+                        "court_aspirant"
+                    ],
+                    "if": {
+                        "resources": {
+                            "coins": {
+                                "atLeast": 3
+                            }
+                        }
+                    },
+                    "options": [
+                        {
+                            "id": "opt_accept_page",
+                            "type": "accept",
+                            "label": "Accept",
+                            "risk": {
+                                "success_chance": 1.0,
+                                "chance_modifiers": []
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 0,
+                                    "nobles": 1,
+                                    "guilds": 0
+                                },
+                                "flags_set": [
+                                    "hall_audience_slot",
+                                    "court_introductions",
+                                    "patronage_route"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 1,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {}
+                        },
+                        {
+                            "id": "opt_page_introduction_bundle",
+                            "type": "bargain",
+                            "label": "Bargain: Bundle introductions for later cuts",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 3
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.55,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "market_relief": true
+                                            }
+                                        },
+                                        "delta": 0.05
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 3,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "nobles": 1
+                                },
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 8,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": [
+                                        "court_introductions"
+                                    ]
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "nobles": -1
+                                }
+                            }
+                        },
+                        {
+                            "id": "opt_patron_circle_tip",
+                            "type": "bargain",
+                            "label": "Bargain: Tip the patron circle",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 3
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.5,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "reputations": {
+                                                "commoners": {
+                                                    "moreThan": 0
+                                                }
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 3,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -1,
+                                "favors": 0,
+                                "reputation": {
+                                    "nobles": 1
+                                },
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 7,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": [
+                                        "hall_audience_slot"
+                                    ]
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {
+                                    "nobles": -1
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "req_black_book_circuit",
+                    "order": 5,
+                    "npc_id": "npc_seren_night_factor",
+                    "title": "Run the Black-Book Circuit",
+                    "text": "With the right doors ajar, we ghost the crates and the margin sings. You keep the cover neat; I’ll count the profits.",
+                    "tags": [
+                        "shadow_ledger",
+                        "river_factor"
+                    ],
+                    "if": {
+                        "resources": {
+                            "coins": {
+                                "atLeast": 2
+                            }
+                        }
+                    },
+                    "options": [
+                        {
+                            "id": "opt_accept_black_book",
+                            "type": "accept",
+                            "label": "Accept",
+                            "risk": {
+                                "success_chance": 1.0,
+                                "chance_modifiers": []
+                            },
+                            "costs": {
+                                "coins": 0,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": 1,
+                                "favors": 0,
+                                "reputation": {
+                                    "commoners": 0,
+                                    "nobles": 0,
+                                    "guilds": 0
+                                },
+                                "flags_set": [
+                                    "black_book",
+                                    "quiet_guards"
+                                ]
+                            },
+                            "effects_on_success": {
+                                "coins": 0,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 1,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": []
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {}
+                        },
+                        {
+                            "id": "opt_sealed_crates_circuit",
+                            "type": "bargain",
+                            "label": "Bargain: Sealed crates, higher margin",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 2
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.5,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "barge_priority": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "charter_audit_cleared": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "hall_audience_slot": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 2,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -1,
+                                "favors": 0,
+                                "reputation": {},
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 7,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 4,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": [
+                                        "black_book",
+                                        "quiet_guards"
+                                    ]
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -3,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": -1
+                                }
+                            }
+                        },
+                        {
+                            "id": "opt_night_gate_sweeteners",
+                            "type": "bargain",
+                            "label": "Bargain: Sweeten the night gates",
+                            "if": {
+                                "resources": {
+                                    "coins": {
+                                        "atLeast": 3
+                                    }
+                                }
+                            },
+                            "risk": {
+                                "success_chance": 0.45,
+                                "chance_modifiers": [
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "court_introductions": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    },
+                                    {
+                                        "if": {
+                                            "flags": {
+                                                "customs_favor": true
+                                            }
+                                        },
+                                        "delta": 0.1
+                                    }
+                                ]
+                            },
+                            "costs": {
+                                "coins": 3,
+                                "favors": 0
+                            },
+                            "effects_immediate": {
+                                "coins": -2,
+                                "favors": 0,
+                                "reputation": {},
+                                "flags_set": []
+                            },
+                            "effects_on_success": {
+                                "coins": 10,
+                                "favors": 0,
+                                "reputation": {},
+                                "schedule_outcome": {
+                                    "day_index": 3,
+                                    "coins": 4,
+                                    "favors": 0,
+                                    "reputation": {},
+                                    "flags_set": [
+                                        "quiet_guards"
+                                    ]
+                                },
+                                "unlocks": []
+                            },
+                            "effects_on_fail": {
+                                "coins": -4,
+                                "favors": 0,
+                                "reputation": {
+                                    "guilds": -1
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        "echo": {
+            "tag_pool": [
+                "court_aspirant",
+                "river_factor",
+                "shadow_ledger",
+                "guild_pressure",
+                "bread_shortfall",
+                "tithe_keeper"
+            ],
+            "npcs_used": [
+                "npc_owen_barge_master",
+                "npc_rotem_wharf_baker",
+                "npc_marta_guild_beadle",
+                "npc_tomas_court_page",
+                "npc_seren_night_factor"
+            ],
+            "integrity": {
+                "requests_count": 5,
+                "orders_ok": true,
+                "ids_unique": true,
+                "no_locked_keys": true,
+                "coins_touched_all": true,
+                "accepts_exactly_one_each": true,
+                "bargains_range_ok": true,
+                "risk_bounds_ok": true,
+                "tags_within_pool": true,
+                "if_schema_valid": true
+            }
+        },
+        "fix_log": [
+            {
+                "request_id": "req_morning_tide_slot",
+                "changes": [
+                    "renamed duplicate option id 'opt_accept' to 'opt_accept_morning' to ensure global uniqueness"
+                ]
+            },
+            {
+                "request_id": "req_steady_loaves_push",
+                "changes": [
+                    "renamed duplicate option id 'opt_accept' to 'opt_accept_loaves' to ensure global uniqueness"
+                ]
+            },
+            {
+                "request_id": "req_audit_grace_extension",
+                "changes": [
+                    "renamed duplicate option id 'opt_accept' to 'opt_accept_audit' to ensure global uniqueness"
+                ]
+            },
+            {
+                "request_id": "req_page_audience_pass",
+                "changes": [
+                    "renamed duplicate option id 'opt_accept' to 'opt_accept_page' to ensure global uniqueness",
+                    "reduced accept schedule_outcome coins: 2 → 1 to keep accept as lowest safe reward",
+                    "increased 'opt_patron_circle_tip' schedule_outcome coins: 6 → 7 to ensure bargain EV ≥ accept EV"
+                ]
+            },
+            {
+                "request_id": "req_black_book_circuit",
+                "changes": [
+                    "renamed duplicate option id 'opt_accept' to 'opt_accept_black_book' to ensure global uniqueness",
+                    "increased 'opt_night_gate_sweeteners' schedule_outcome coins: 3 → 4 to ensure bargain EV ≥ accept EV"
+                ]
+            }
+        ]
+    }
+}

@@ -1,0 +1,295 @@
+{
+    "p1_result": {
+        "schema_version": "p1.1",
+        "from_state_digest": true,
+        "version": "2.2",
+        "tag_pool": [
+            "court_aspirant",
+            "river_factor",
+            "shadow_ledger",
+            "guild_pressure",
+            "bread_shortfall",
+            "tithe_keeper"
+        ],
+        "tag_behavior": {
+            "court_aspirant": {
+                "motives": [
+                    "prestige",
+                    "access",
+                    "patronage"
+                ],
+                "deal_shapes": [
+                    "investment",
+                    "brokered_chain",
+                    "conversion"
+                ],
+                "payout_bias": "deferred_large",
+                "risk_profile": "medium",
+                "reputation_bands": [
+                    "nobles"
+                ],
+                "common_flags": [
+                    "court_introductions",
+                    "hall_audience_slot",
+                    "patronage_route"
+                ]
+            },
+            "river_factor": {
+                "motives": [
+                    "throughput",
+                    "timing",
+                    "docking_rights"
+                ],
+                "deal_shapes": [
+                    "brokered_chain",
+                    "direct",
+                    "deferred_payment"
+                ],
+                "payout_bias": "steady_medium",
+                "risk_profile": "medium",
+                "reputation_bands": [
+                    "guilds",
+                    "commoners"
+                ],
+                "common_flags": [
+                    "harbor_weather_watch",
+                    "barge_priority",
+                    "customs_favor"
+                ]
+            },
+            "shadow_ledger": {
+                "motives": [
+                    "secrecy",
+                    "deniable_profit"
+                ],
+                "deal_shapes": [
+                    "brokered_chain",
+                    "conversion",
+                    "deferred_payment"
+                ],
+                "payout_bias": "high_variance",
+                "risk_profile": "high",
+                "reputation_bands": [
+                    "guilds",
+                    "nobles"
+                ],
+                "common_flags": [
+                    "black_book",
+                    "quiet_guards"
+                ]
+            },
+            "guild_pressure": {
+                "motives": [
+                    "quota",
+                    "inputs",
+                    "fine_avoidance"
+                ],
+                "deal_shapes": [
+                    "direct",
+                    "investment",
+                    "deferred_payment"
+                ],
+                "payout_bias": "steady_medium",
+                "risk_profile": "low",
+                "reputation_bands": [
+                    "guilds"
+                ],
+                "common_flags": [
+                    "charter_audit_cleared",
+                    "quota_push"
+                ]
+            },
+            "bread_shortfall": {
+                "motives": [
+                    "relief",
+                    "price_stability"
+                ],
+                "deal_shapes": [
+                    "direct",
+                    "conversion"
+                ],
+                "payout_bias": "immediate_small",
+                "risk_profile": "low",
+                "reputation_bands": [
+                    "commoners"
+                ],
+                "common_flags": [
+                    "market_relief",
+                    "granary_release"
+                ]
+            },
+            "tithe_keeper": {
+                "motives": [
+                    "piety",
+                    "construction",
+                    "moral_sway"
+                ],
+                "deal_shapes": [
+                    "investment",
+                    "conversion",
+                    "deferred_payment"
+                ],
+                "payout_bias": "deferred_medium",
+                "risk_profile": "medium",
+                "reputation_bands": [
+                    "nobles",
+                    "commoners"
+                ],
+                "common_flags": [
+                    "patronage_route"
+                ]
+            }
+        },
+        "npcs": [
+            {
+                "id": "npc_lady_mirelle_patron",
+                "name": "Lady Mirelle of Ashford",
+                "role": "court patron",
+                "blurb": "Keeps a glittering salon near the throne room. Coins buy artists; favor buys access.",
+                "tags": [
+                    "court_aspirant",
+                    "tithe_keeper"
+                ],
+                "voice_seed": "polished, a touch impatient; expects deference"
+            },
+            {
+                "id": "npc_owen_barge_master",
+                "name": "Owen the Barge-Master",
+                "role": "barge master",
+                "blurb": "Runs three rafts through the river tolls. Timing is his weapon, moorage his leverage.",
+                "tags": [
+                    "river_factor",
+                    "guild_pressure"
+                ],
+                "voice_seed": "gruff, practical; speaks in schedules and loads"
+            },
+            {
+                "id": "npc_ilan_quiet_scribe",
+                "name": "Ilan the Quiet Scribe",
+                "role": "clandestine scribe",
+                "blurb": "Copies ledgers twice—one for the Crown, one for the night. Ink hides more than words.",
+                "tags": [
+                    "shadow_ledger"
+                ],
+                "voice_seed": "hushed, coded slang; never states a thing outright"
+            },
+            {
+                "id": "npc_rotem_wharf_baker",
+                "name": "Rotem the Wharf Baker",
+                "role": "wharf baker",
+                "blurb": "Feeds stevedores at dawn. Flour thin, tempers thinner when grain runs late.",
+                "tags": [
+                    "bread_shortfall",
+                    "river_factor"
+                ],
+                "voice_seed": "warm but hurried; pleads with urgency when flour is low"
+            },
+            {
+                "id": "npc_marta_guild_beadle",
+                "name": "Beadle Marta",
+                "role": "guild beadle",
+                "blurb": "Carries the charter and a cudgel of fines. Quotas first, excuses later.",
+                "tags": [
+                    "guild_pressure",
+                    "court_aspirant"
+                ],
+                "voice_seed": "officious, clipped; cites clauses and penalties"
+            },
+            {
+                "id": "npc_abel_parish_bursar",
+                "name": "Bursar Abel",
+                "role": "parish bursar",
+                "blurb": "Counts coppers for candles and stone. Promises blessings, tallies receipts.",
+                "tags": [
+                    "tithe_keeper",
+                    "bread_shortfall"
+                ],
+                "voice_seed": "pious and formal; frames asks as moral duties"
+            },
+            {
+                "id": "npc_seren_night_factor",
+                "name": "Seren the Night Factor",
+                "role": "night factor",
+                "blurb": "Moves goods when shutters close. Knows which guards prefer warm hands to cold orders.",
+                "tags": [
+                    "shadow_ledger",
+                    "river_factor"
+                ],
+                "voice_seed": "silky, amused; speaks in favors owed and doors unlocked"
+            },
+            {
+                "id": "npc_hana_quarry_mistress",
+                "name": "Hana of the Quarry",
+                "role": "quarry mistress",
+                "blurb": "Stone, teams, and bruised knuckles. Cathedral or courthouse—her blocks make reputations.",
+                "tags": [
+                    "guild_pressure",
+                    "court_aspirant",
+                    "tithe_keeper"
+                ],
+                "voice_seed": "steady, no-nonsense; bargains in wagons and deadlines"
+            },
+            {
+                "id": "npc_yakob_miller",
+                "name": "Yakob the Miller",
+                "role": "miller",
+                "blurb": "Grinds the town’s grain; hears every rumor in the queue. Stones slow without coin.",
+                "tags": [
+                    "bread_shortfall",
+                    "guild_pressure"
+                ],
+                "voice_seed": "anxious but eager; counts sacks out loud"
+            },
+            {
+                "id": "npc_tomas_court_page",
+                "name": "Tomas the Page",
+                "role": "court page",
+                "blurb": "Runs notes between antechambers. Knows who waits, and who never must.",
+                "tags": [
+                    "court_aspirant"
+                ],
+                "voice_seed": "eager, breathless; gossip wrapped in deference"
+            }
+        ],
+        "roster_stats": {
+            "total_npcs": 10,
+            "tag_usage_counts": {
+                "court_aspirant": 4,
+                "river_factor": 3,
+                "shadow_ledger": 2,
+                "guild_pressure": 4,
+                "bread_shortfall": 3,
+                "tithe_keeper": 3
+            },
+            "tag_cardinality_distribution": {
+                "one_tag": 2,
+                "two_tags": 7,
+                "three_tags": 1
+            }
+        },
+        "continuity_notes": {
+            "reused_npcs": [
+                "npc_lady_mirelle_patron",
+                "npc_owen_barge_master",
+                "npc_ilan_quiet_scribe",
+                "npc_rotem_wharf_baker",
+                "npc_marta_guild_beadle",
+                "npc_abel_parish_bursar",
+                "npc_seren_night_factor",
+                "npc_hana_quarry_mistress",
+                "npc_yakob_miller",
+                "npc_tomas_court_page"
+            ],
+            "reused_tags": [
+                "court_aspirant",
+                "river_factor",
+                "shadow_ledger",
+                "guild_pressure",
+                "bread_shortfall",
+                "tithe_keeper"
+            ],
+            "new_npcs": [],
+            "new_tags": []
+        }
+    }
+}
